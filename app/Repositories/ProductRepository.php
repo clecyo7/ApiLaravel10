@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductRepository
 {
@@ -15,6 +16,20 @@ class ProductRepository
         $product = Product::orderBy('id', 'asc')->get();
         return response()->json(['data' => $product]);
     }
+
+
+    public function create(Request $request)
+    {
+        $cargo = Product::create($request->all());
+        return $cargo;
+    }
+
+    public function update(Request $request, $id)
+    {
+        $cargo = Product::where('id', $id)->update($request->all());
+        return $cargo;
+    }
+
 
     /**
      * @inheritDoc
